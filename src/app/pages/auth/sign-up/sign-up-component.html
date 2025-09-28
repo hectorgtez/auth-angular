@@ -1,0 +1,60 @@
+<section class="form">
+  <div class="form__container">
+    <h1>Sign Up</h1>
+    <form [formGroup]="form" (submit)="signUp()">
+      <div>
+        <mat-form-field>
+          <mat-label>First name</mat-label>
+          <input matInput formControlName="firstName"/>
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Last name</mat-label>
+          <input matInput formControlName="lastName"/>
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email"/>
+          <mat-error *ngIf="isEmailValid as message">{{ message }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Enter your password</mat-label>
+          <input matInput formControlName="password" [type]="hide ? 'password' : 'text'"/>
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <button mat-flat-button color="accent" type="submit">Sign Up</button>
+      </div>
+    </form>
+
+    <hr>
+
+    <span class="small-text providers">Have Google or GitHub?</span>
+    <app-button-providers [isLogin]="false"/>
+
+    <span class="small-text log-in-redirect">
+      Already have an account? <a routerLink="/auth/log-in">Log in</a>
+    </span>
+  </div>
+</section>

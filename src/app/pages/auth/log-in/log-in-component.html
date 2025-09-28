@@ -1,0 +1,48 @@
+<section class="form">
+  <div class="form__container">
+    <h1>Log In</h1>
+    <form [formGroup]="form" (submit)="logIn()">
+      <div>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email"/>
+          <mat-error *ngIf="isEmailValid as message">{{ message }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Enter your password</mat-label>
+          <input
+            matInput
+            formControlName="password"
+            [type]="hide ? 'password' : 'text'"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <button mat-flat-button color="accent" type="submit">Log In</button>
+      </div>
+    </form>
+
+    <hr>
+
+    <span class="small-text providers">Have Google or GitHub?</span>
+    <app-button-providers [isLogin]="true"/>
+
+    <span class="small-text log-in-redirect">
+      Don't have an account yet? <a routerLink="/auth/sign-up">Sign up</a>
+    </span>
+  </div>
+</section>
